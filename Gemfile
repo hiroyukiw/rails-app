@@ -12,6 +12,12 @@ gem "sqlite3", "~> 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+gem 'hirb'                # コンソール出力結果を表にする
+gem 'hirb-unicode'        # コンソール文字の表示を補正する
+gem 'knock', '~> 2.1.1'   # JWT認証機構
+gem 'bcrypt', '~> 3.1.11' # password暗号化
+gem 'aws-ses', '~> 0.6'   # 本番環境 mailer
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -39,10 +45,21 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails', '~> 2.5.0', require: 'dotenv/rails-now' # 環境変数の管理
+  gem 'pry-byebug'             # binding.pry
+  gem 'sqlite3', '~> 1.4'      # development DB
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
+end
+
+group :test do
+  gem 'minitest-reporters', '~> 1.1.9'  # test色付け
+end
+
+group :production do
+  gem 'pg', '~> 0.18.4' # heroku DB
 end
 
